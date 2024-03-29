@@ -1,6 +1,6 @@
 # set screen resolution
-sleep 2s
-#xrandr --output eDP1 --mode 1920x1200 --output HDMI1 --mode 1920x1080 --right-of eDP1
+#sleep 2s
+xrandr --output DisplayPort-1 --auto --output HDMI-A-0 --auto --right-of DisplayPort-1
 #screen.sh on
 
 # restore wallpapers from previous session

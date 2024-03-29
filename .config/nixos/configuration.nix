@@ -17,6 +17,11 @@
   # prevent screen flicker on Tuxedo Infinitybook 14
   boot.kernelParams = [ "i915.enable_psr=0" "amdgpu" ];
 
+  # activate SysRq
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1;
+  };
+
   networking.hostName = "mutsu"; # Define your hostname.
   networking.domain = "kai.ni"; # Define your domain
   # Pick only one of the below networking options.
@@ -127,7 +132,7 @@
   };
 
   # Enable bluetooth
-  # hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
 
   # virtualisations
   virtualisation.libvirtd.enable = true;
@@ -239,7 +244,7 @@
     localuser = null;
   };
 
-  # services.blueman.enable = true;
+  services.blueman.enable = true;
 
   services.fstrim.enable = true;
 

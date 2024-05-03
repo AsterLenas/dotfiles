@@ -33,5 +33,6 @@ image = random.choice(images)
 feh = "feh --bg-fill " + image
 wal = "wal -n -i " + image
 
-subprocess.run(feh, shell=True)
-subprocess.run(wal, shell=True)
+if __name__ == "__main__":
+    subprocess.run(feh, shell=True)
+    subprocess.run(wal, shell=True)

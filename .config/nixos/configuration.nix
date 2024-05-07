@@ -164,6 +164,7 @@
     du-dust
     emacs
     eza
+    fastfetch
     fd
     feh
     flameshot
@@ -175,7 +176,6 @@
     libsForQt5.qtstyleplugin-kvantum
     lxappearance
     lxde.lxsession
-    neofetch
     networkmanagerapplet
     nix-zsh-completions
     numix-cursor-theme

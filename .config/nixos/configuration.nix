@@ -90,12 +90,13 @@
     };
     desktopManager.xterm.enable = false;
     xkb.layout = "de"; # X11-keymap
-    #libinput.enable = true; # touchpad
     displayManager.startx.enable = true;
     videoDrivers = [ "amdgpu" ];
     dpi = 100;
     excludePackages = [ pkgs.xterm ];
   };
+
+  #services.libinput.enable = true; # touchpad
 
   qt = {
     enable = true;

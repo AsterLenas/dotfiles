@@ -113,13 +113,13 @@
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 
   # AMD Vulkan Driver
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     amdvlk
   ];
   # For 32 bit applications 
-  hardware.opengl.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
+  #hardware.graphics.extraPackages32 = with pkgs; [
+  #  driversi686Linux.amdvlk
+  #];
 
   # Enable sound.
   # sound.enable = true;
@@ -187,9 +187,8 @@
     pavucontrol
     pcmanfm
     picom
-    powerline
+    #powerline
     procs
-    pywal
     qtpass
     remmina
     ripgrep
@@ -200,6 +199,7 @@
     vesktop
     vimHugeX
     virt-manager
+    wallust
     xclip
     xfce.ristretto
     yt-dlp

@@ -31,7 +31,7 @@ images = filter(images, [".jpg", ".png", ".jpeg"])
 image = random.choice(images)
 
 feh = "feh --bg-fill " + image
-wal = "wal -n -i " + image
+wal = "wallust run " + image
 
 if __name__ == "__main__":
     subprocess.run(feh, shell=True)

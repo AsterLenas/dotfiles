@@ -4,7 +4,7 @@ xrandr --output DisplayPort-1 --auto --output HDMI-A-0 --auto --right-of Display
 #screen.sh on
 
 # restore wallpapers from previous session
-#(sleep 2s && ./.fehbg) &
+./.fehbg &
 
 # load X resources
 xrdb ~/.Xresources
@@ -24,7 +24,7 @@ xset dpms 0 0 0 &
 xset -dpms &
 
 # load pywal colorscheme
-wal -R &
+#wal -R &
 
 # launch Nextcloud sync
 nextcloud &

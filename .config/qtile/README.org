@@ -1,6 +1,6 @@
 #+title: Qtile config
 #+author: Cinque
-#+date: [2022-09-19 Mon]
+#+date: [2024-08-08 Thu]
 
 #+PROPERTY: header-args :tangle config.py
 
@@ -29,7 +29,7 @@ from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Screen, Match
 from libqtile.lazy import lazy
 
-import colors # symlink to $HOME/.cache/wal/colors.py
+import colors # symlink to $HOME/.cache/wallust/colors.py
 #+END_SRC
 
 * Variables
@@ -304,12 +304,53 @@ screen2 = Screen(
 )
 #+END_SRC
 
+#+BEGIN_SRC python
+screen3 = Screen(
+    top=bar.Bar(
+        [
+            #widget.Image(
+            #    filename="~/.config/qtile/icons/arch.svg",
+            #),
+            widget.GroupBox(active=colors.color1, inactive=colors.color5,
+                            this_current_screen_border=colors.color2, this_screen_border=colors.color5, hide_unused=False),
+            widget.Sep(foreground=colors.color5),
+            widget.Prompt(),
+            widget.Memory(foreground=colors.color1),
+            #widget.Sep(foreground=colors.color5),
+            #widget.Net(foreground=colors.color1, interface="enp0s20f0u4u2c2"),
+            widget.Chord(
+                chords_colors={
+                    'launch': ("#ff0000", "#ffffff"),
+                },
+                name_transform=lambda name: name.upper(),
+            ),
+            widget.Spacer(),
+            widget.GenPollText(func=lambda: subprocess.check_output("syspart.sh").decode("utf-8"), update_interval=10,
+                               foreground=colors.color1),
+            widget.Sep(foreground=colors.color5),
+            #widget.GenPollText(func=lambda: subprocess.check_output("ip.sh").decode("utf-8"), update_interval=100,
+            #                   foreground=colors.color1),
+            #widget.Sep(foreground=colors.color5),
+            widget.GenPollText(func=lambda: subprocess.check_output("kernel.sh").decode("utf-8"), update_interval=1000,
+                               foreground=colors.color1),
+            widget.Sep(foreground=colors.color5),
+            widget.Clock(foreground=colors.color1, format='%Y-%m-%d %a %I:%M %p'),
+        ],
+        24,
+        background=colors.background,
+        margin=5,
+        opacity=0.8,
+    ),
+)
+#+END_SRC
+
 #+RESULTS:
 
 #+BEGIN_SRC python
 screens = [
     screen1,
     screen2,
+    screen3,
 ]
 #+END_SRC
 

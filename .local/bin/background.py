@@ -12,7 +12,7 @@ def filter(string, substring):
 
 home = expanduser("~")
 fixpath = home + "/nextcloud-backup/Wallpaper"
-imgdirs = ["others", "alphacoders", "elden_ring", "nobunaga", "nexus",
+imgdirs = ["others", "alphacoders", "elden_ring", "nobunaga", "nexus", "elsword",
            "cirno", "lodoss", "kancolle", "lies_of_p", "ships", "eiyuden_chronicles"]
 imgpaths = [join(fixpath, p) for p in imgdirs]
 

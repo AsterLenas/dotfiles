@@ -10,7 +10,7 @@ xrandr --output DisplayPort-1 --auto --output HDMI-A-0 --auto --right-of Display
 xrdb ~/.Xresources
 
 # start picom
-picom --experimental-backends &
+picom &
 
 # start Networkmanager
 nm-applet &

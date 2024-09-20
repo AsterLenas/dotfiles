@@ -191,6 +191,7 @@
     procs
     qtpass
     remmina
+    rustdesk-flutter
     ripgrep
     rofi
     rsync

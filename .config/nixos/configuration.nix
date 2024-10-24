@@ -114,7 +114,7 @@
 
   # AMD Vulkan Driver
   hardware.graphics.extraPackages = with pkgs; [
-    amdvlk
+    stable.amdvlk
   ];
   # For 32 bit applications 
   #hardware.graphics.extraPackages32 = with pkgs; [

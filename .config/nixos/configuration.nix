@@ -118,9 +118,9 @@
     stable.amdvlk
   ];
   # For 32 bit applications 
-  #hardware.graphics.extraPackages32 = with pkgs; [
-  #  driversi686Linux.amdvlk
-  #];
+  hardware.graphics.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
 
   # Enable sound.
   # sound.enable = true;
@@ -188,19 +188,19 @@
     pavucontrol
     pcmanfm
     picom
-    #powerline
     procs
     qtpass
     remmina
-    rustdesk-flutter
     ripgrep
     rofi
     rsync
+    rustdesk-flutter
     starship
     topgrade
     vesktop
     vimHugeX
     virt-manager
+    vscodium
     wallust
     xclip
     xfce.ristretto

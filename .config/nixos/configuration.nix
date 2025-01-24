@@ -22,7 +22,7 @@
     "kernel.sysrq" = 1;
   };
 
-  networking.hostName = "mutsu"; # Define your hostname.
+  networking.hostName = "taihou"; # Define your hostname.
   networking.domain = "kai.ni"; # Define your domain
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -113,14 +113,18 @@
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 
-  # AMD Vulkan Driver
-  hardware.graphics.extraPackages = with pkgs; [
-    stable.amdvlk
-  ];
-  # For 32 bit applications 
-  hardware.graphics.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    # AMD Vulkan Driver
+    extraPackages = with pkgs; [
+      stable.amdvlk
+    ];
+    # For 32 bit applications
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
+  };
 
   # Enable sound.
   # sound.enable = true;

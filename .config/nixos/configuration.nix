@@ -99,11 +99,6 @@
 
   #services.libinput.enable = true; # touchpad
 
-  qt = {
-    enable = true;
-    platformTheme = "qt5ct";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.avahi.enable = true;
@@ -178,8 +173,8 @@
     git
     gnupg
     htop
+    keepassxc
     kitty
-    libsForQt5.qtstyleplugin-kvantum
     lxappearance
     lxde.lxsession
     networkmanagerapplet
@@ -187,13 +182,11 @@
     numix-cursor-theme
     numix-gtk-theme
     numix-icon-theme
-    pass
     pasystray
     pavucontrol
     pcmanfm
     picom
     procs
-    qtpass
     remmina
     ripgrep
     rofi
@@ -241,14 +234,13 @@
 
   programs.gnupg.agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
   
   # List of services that you want to enable:
   services.locate = {
     package = pkgs.mlocate;
     enable = true;
-    localuser = null;
   };
 
   # services.blueman.enable = true;

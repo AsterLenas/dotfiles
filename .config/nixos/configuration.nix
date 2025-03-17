@@ -191,7 +191,7 @@
     ripgrep
     rofi
     rsync
-    rustdesk-flutter
+    stable.rustdesk-flutter
     starship
     topgrade
     vesktop

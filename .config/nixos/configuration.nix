@@ -194,6 +194,7 @@
     stable.rustdesk-flutter
     starship
     topgrade
+    v4l-utils # Webcam controlls
     vesktop
     vimHugeX
     virt-manager

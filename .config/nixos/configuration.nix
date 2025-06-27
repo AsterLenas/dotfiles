@@ -87,7 +87,7 @@
     enable = true;
     windowManager.qtile = {
       enable = true;
-      package = pkgs.stable.qtile;
+      package = pkgs.stable.python3.pkgs.qtile;
     };
     desktopManager.xterm.enable = false;
     xkb.layout = "de"; # X11-keymap

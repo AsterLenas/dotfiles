@@ -112,13 +112,13 @@
     enable = true;
     enable32Bit = true;
     # AMD Vulkan Driver
-    extraPackages = with pkgs; [
-      stable.amdvlk
-    ];
+    #extraPackages = with pkgs; [
+    #  stable.amdvlk
+    #];
     # For 32 bit applications
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-    ];
+    #extraPackages32 = with pkgs; [
+    #  driversi686Linux.amdvlk
+    #];
   };
 
   # Enable sound.
@@ -137,6 +137,7 @@
 
   # virtualisations
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cinque = {
@@ -144,6 +145,7 @@
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
       "libvirtd" # Allow usage of libvirt without extra authentication.
+      "docker"
       "scanner"
       "lp"
     ];
@@ -162,6 +164,7 @@
     brave
     coreutils
     curl
+    distrobox
     du-dust
     emacs
     eza
@@ -176,7 +179,7 @@
     keepassxc
     kitty
     lxappearance
-    lxde.lxsession
+    lxsession
     networkmanagerapplet
     nix-zsh-completions
     numix-cursor-theme

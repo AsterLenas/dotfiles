@@ -93,6 +93,7 @@
     xkb.layout = "de"; # X11-keymap
     displayManager.startx.enable = true;
     videoDrivers = [ "amdgpu" ];
+    deviceSection = ''Option "TearFree" "true"'';
     dpi = 100;
     excludePackages = [ pkgs.xterm ];
   };

@@ -163,10 +163,11 @@
     bat
     beauty-line-icon-theme
     brave
+    btop-rocm
     coreutils
     curl
     distrobox
-    du-dust
+    dust
     emacs
     eza
     fastfetch
@@ -200,7 +201,7 @@
     topgrade
     v4l-utils # Webcam controlls
     vesktop
-    vimHugeX
+    vim-full
     virt-manager
     vscodium
     wallust
@@ -224,7 +225,7 @@
       font-awesome
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       source-han-code-jp
       source-han-sans
     ];

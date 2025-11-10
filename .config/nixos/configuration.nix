@@ -44,6 +44,11 @@
     "/home".options = [ "defaults" "compress=zstd" ];
   };
 
+  swapDevices = [ {
+    device = "/swapfile";
+    size = 8*1024;
+  } ];
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 

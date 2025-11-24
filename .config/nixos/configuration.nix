@@ -201,6 +201,7 @@
     ripgrep
     rofi
     rsync
+    seafile-client
     stable.rustdesk-flutter
     starship
     topgrade

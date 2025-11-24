@@ -27,10 +27,13 @@ xset -dpms &
 #wal -R &
 
 # launch Nextcloud sync
-nextcloud &
+# nextcloud &
+
+# launch Seafile client
+seafile-applet &
 
 # launch flameshot as a background process
 flameshot &
 
 # load emacs daemon
-emacs --daemon &
+# emacs --daemon &

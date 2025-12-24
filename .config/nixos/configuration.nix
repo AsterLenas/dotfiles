@@ -20,6 +20,7 @@
   # activate SysRq
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
+    "vm.max_map_count" = 2147483642;
   };
 
   networking.hostName = "taihou"; # Define your hostname.
@@ -85,7 +86,12 @@
   };
 
   # install steam
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+
+  programs.gamemode.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -117,14 +123,13 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    # AMD Vulkan Driver
-    #extraPackages = with pkgs; [
-    #  stable.amdvlk
-    #];
+    extraPackages = with pkgs; [
+      mesa
+    ];
     # For 32 bit applications
-    #extraPackages32 = with pkgs; [
-    #  driversi686Linux.amdvlk
-    #];
+    extraPackages32 = with pkgs; [
+      pkgsi686Linux.mesa
+    ];
   };
 
   # Enable sound.
@@ -182,11 +187,13 @@
     gcc
     git
     gnupg
+    goverlay
     htop
     keepassxc
     kitty
     lxappearance
     lxsession
+    mangohud
     networkmanagerapplet
     nix-zsh-completions
     numix-cursor-theme
@@ -209,6 +216,7 @@
     vesktop
     vim-full
     virt-manager
+    vkbasalt
     vscodium
     wallust
     xclip
@@ -219,6 +227,11 @@
     zsh-completions
     zsh-syntax-highlighting
   ];
+
+  environment.sessionVariables = {
+    AMD_VULKAN_ICD = "RADV";
+    RADV_PERFTEST = "aco";
+  };
 
   fonts = {
     fontconfig = {

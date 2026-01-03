@@ -220,7 +220,7 @@
     vscodium
     wallust
     xclip
-    xfce.ristretto
+    ristretto
     yt-dlp
     zsh
     zsh-autosuggestions

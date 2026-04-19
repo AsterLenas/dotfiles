@@ -45,10 +45,10 @@
     "/home".options = [ "defaults" "compress=zstd" ];
   };
 
-  swapDevices = [ {
-    device = "/swapfile";
-    size = 8*1024;
-  } ];
+#  swapDevices = [ {
+#    device = "/swapfile";
+#    size = 8*1024;
+#  } ];
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -260,6 +260,14 @@
   programs.gnupg.agent = {
     enable = true;
     pinentryPackage = pkgs.pinentry-gnome3;
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    plugins = [
+      pkgs.obs-studio-plugins.obs-pipewire-audio-capture
+    ];
   };
   
   # List of services that you want to enable:

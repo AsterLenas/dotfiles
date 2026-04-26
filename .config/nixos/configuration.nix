@@ -95,19 +95,31 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    enable = true;
+    enable = false;
     windowManager.qtile = {
-      enable = true;
+      enable = false;
       package = pkgs.stable.python3.pkgs.qtile;
     };
     desktopManager.xterm.enable = false;
     xkb.layout = "de"; # X11-keymap
-    displayManager.startx.enable = true;
+    displayManager.startx.enable = false;
     videoDrivers = [ "amdgpu" ];
     deviceSection = ''Option "TearFree" "true"'';
     dpi = 100;
     excludePackages = [ pkgs.xterm ];
   };
+
+  services.desktopManager.plasma6.enable = true;
+
+  services.displayManager.plasma-login-manager.enable = true;
+
+  # Plasma package exclusion
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    elisa
+    konqueror
+    accessibility-inspector
+  ];
 
   #services.libinput.enable = true; # touchpad
 
@@ -189,20 +201,14 @@
     gnupg
     goverlay
     htop
-    keepassxc
     kitty
-    lxappearance
-    lxsession
     mangohud
     networkmanagerapplet
     nix-zsh-completions
     numix-cursor-theme
     numix-gtk-theme
     numix-icon-theme
-    pasystray
     pavucontrol
-    pcmanfm
-    picom
     procs
     remmina
     ripgrep

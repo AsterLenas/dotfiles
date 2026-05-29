@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # prevent screen flicker on Tuxedo Infinitybook 14
-  boot.kernelParams = [ "i915.enable_psr=0" "amdgpu" ];
+  boot.kernelParams = [ "i915.enable_psr=0" "amdgpu" "intel_pstate=active" ];
 
   # activate SysRq
   boot.kernel.sysctl = {
@@ -121,6 +121,19 @@
     accessibility-inspector
   ];
 
+  # Portals
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs.kdePackages; [
+      xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common.default = [ "kde" "gtk" ];
+      kde.default = [ "kde" ];
+    };
+  };
+
   #services.libinput.enable = true; # touchpad
 
   # Enable CUPS to print documents.
@@ -195,7 +208,6 @@
     fastfetch
     fd
     feh
-    flameshot
     gcc
     git
     gnupg
@@ -219,14 +231,13 @@
     starship
     topgrade
     v4l-utils # Webcam controlls
-    vesktop
+    (vesktop.override { withSystemVencord = true; })
     vim-full
     virt-manager
     vkbasalt
     vscodium
     wallust
     xclip
-    ristretto
     yt-dlp
     zsh
     zsh-autosuggestions

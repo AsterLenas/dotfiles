@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # prevent screen flicker on Tuxedo Infinitybook 14
-  boot.kernelParams = [ "i915.enable_psr=0" "amdgpu" "intel_pstate=active" ];
+  boot.kernelParams = [ "i915.enable_psr=0" "amdgpu" "intel_pstate=passive" ];
 
   # activate SysRq
   boot.kernel.sysctl = {
@@ -90,6 +90,9 @@
     enable = true;
     gamescopeSession.enable = true;
   };
+
+  hardware.steam-hardware.enable=true;
+
 
   programs.gamemode.enable = true;
 

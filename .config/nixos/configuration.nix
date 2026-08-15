@@ -144,6 +144,10 @@
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
 
+  security.pki.certificateFiles = [
+    /opt/internalCA.pem
+  ];
+
   # Enable scanning
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
@@ -217,12 +221,10 @@
     goverlay
     htop
     kitty
+    jellyfin-desktop
     mangohud
     networkmanagerapplet
     nix-zsh-completions
-    numix-cursor-theme
-    numix-gtk-theme
-    numix-icon-theme
     pavucontrol
     procs
     remmina

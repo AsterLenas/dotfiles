@@ -232,7 +232,6 @@
     rofi
     rsync
     seafile-client
-    stable.rustdesk-flutter
     starship
     topgrade
     v4l-utils # Webcam controlls

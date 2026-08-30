@@ -1,43 +1,60 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
-# Upstream DNS
-UPSTREAM="https://dns10.quad9.net/dns-query"
+INSTALLDIR="/opt/dnscrypt-proxy"
+SERVICE="/etc/systemd/system/dnscrypt-proxy.service"
+PATCH="$INSTALLDIR/changes.patch"
+ARCHIVE="dnscrypt-proxy-linux_arm64-2.1.18.tar.gz"
 
-echo "Downloading and installing cloudflared:"
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
-sudo mv -f ./cloudflared-linux-arm64 /usr/local/bin/cloudflared
-sudo chmod +x /usr/local/bin/cloudflared
+echo "Downloading and installing dnscrypt-proxy:"
+wget -P /opt https://github.com/DNSCrypt/dnscrypt-proxy/releases/download/2.1.18/$ARCHIVE
 
-echo "Checking if cloudflared was succesfully installed"
-cloudflared -v || exit 1
+tar -xf /opt/$ARCHIVE -C /opt
 
-sudo useradd -s /usr/sbin/nologin -r -M cloudflared
+echo "Creating Patch file"
+cat > "$PATCH" <<EOF
+--- example-dnscrypt-proxy.toml 2026-07-18 14:02:22.000000000 +0200
++++ dnscrypt-proxy.toml 2026-08-15 12:33:39.616063545 +0200
+@@ -28,6 +28,7 @@
+ ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-echo "Creating file with default parameters:"
-echo "# Commandline args for cloudflared, using Cloudflare DNS" | sudo tee /etc/default/cloudflared
-echo "CLOUDFLARED_OPTS=--port 5053 --upstream $UPSTREAM" | sudo tee -a /etc/default/cloudflared
-echo ""
+ # server_names = ['scaleway-fr', 'google', 'yandex', 'cloudflare']
++ server_names = ['cloudflare']
 
-sudo chown cloudflared:cloudflared /etc/default/cloudflared
-sudo chown cloudflared:cloudflared /usr/local/bin/cloudflared
+
+ ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
+@@ -37,7 +38,7 @@
+ ## To listen to all IPv4 addresses, use \`listen_addresses = ['0.0.0.0:53']\`
+ ## To listen to all IPv4+IPv6 addresses, use \`listen_addresses = ['[::]:53']\`
+
+-listen_addresses = ['127.0.0.1:53']
++listen_addresses = ['127.0.0.1:5053']
+
+
+ ## Maximum number of simultaneous client connections to accept
+EOF
+
+cd "$INSTALLDIR" && patch -p1 < "$PATCH"
 
 echo "Creating systemd service:"
-echo "[Unit]" | sudo tee /etc/systemd/system/cloudflared.service
-echo "Description=cloudflared DNS over HTTPS proxy" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "After=syslog.target network-online.target" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "[Service]" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "Type=simple" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "User=cloudflared" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "EnvironmentFile=/etc/default/cloudflared" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "ExecStart=/usr/local/bin/cloudflared proxy-dns ""$""CLOUDFLARED_OPTS" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "Restart=on-failure" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "RestartSec=10" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "KillMode=process" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "[Install]" | sudo tee -a /etc/systemd/system/cloudflared.service
-echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/cloudflared.service
+sudo tee "$SERVICE" > /dev/null <<EOF
+[Unit]
+Description=Encrypted/authenticated DNS proxy
+ConditionFileIsExecutable=$INSTALLDIR/dnscrypt-proxy
 
-sudo systemctl enable cloudflared
-sudo systemctl start cloudflared
-sudo systemctl status cloudflared
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=$INSTALLDIR/dnscrypt-proxy
+WorkingDirectory=$INSTALLDIR
+Restart=always
+RestartSec=120
+EnvironmentFile=-/etc/sysconfig/dnscrypt-proxy
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable dnscrypt-proxy
+sudo systemctl start dnscrypt-proxy
+sudo systemctl status dnscrypt-proxy

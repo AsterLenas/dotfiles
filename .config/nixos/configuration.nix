@@ -218,7 +218,7 @@
     gcc
     git
     gnupg
-    goverlay
+    stable.goverlay
     htop
     kitty
     jellyfin-desktop

@@ -93,8 +93,16 @@
 
   hardware.steam-hardware.enable=true;
 
-
   programs.gamemode.enable = true;
+
+
+  programs.ssh = {
+    extraConfig = ''
+      Host *
+        HashKnownHosts yes
+    '';
+  };
+
 
   # Enable the X11 windowing system.
   services.xserver = {

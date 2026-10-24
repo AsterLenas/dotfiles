@@ -130,6 +130,19 @@
     elisa
     konqueror
     accessibility-inspector
+    akonadi
+    akonadi-calendar
+    akonadi-contacts
+    akonadi-mime
+    akonadi-search
+    akonadiconsole
+    kaddressbook
+    kalarm
+    akregator
+    kontact
+    kmail
+    ktnef
+    merkuro
   ];
 
   # Portals
@@ -137,10 +150,9 @@
     enable = true;
     extraPortals = with pkgs.kdePackages; [
       xdg-desktop-portal-kde
-      pkgs.xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = [ "kde" "gtk" ];
+      common.default = [ "kde" ];
       kde.default = [ "kde" ];
     };
   };
@@ -187,12 +199,16 @@
   # hardware.bluetooth.enable = true;
 
   # virtualisations
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.swtpm.enable = true;
+  };
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.cinque = {
+  users.users.kito = {
     isNormalUser = true;
+    description = "Kito-tan";
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
       "libvirtd" # Allow usage of libvirt without extra authentication.
@@ -201,10 +217,6 @@
       "lp"
     ];
     shell = pkgs.zsh;
-  #   packages = with pkgs; [
-  #     brave
-  #     thunderbird
-  #   ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -225,7 +237,6 @@
     feh
     gcc
     git
-    gnupg
     stable.goverlay
     htop
     kitty
@@ -286,14 +297,9 @@
     syntaxHighlighting.enable = true;
   };
 
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
-  };
-
   programs.obs-studio = {
     enable = true;
-    enableVirtualCamera = true;
+    #enableVirtualCamera = true;
     plugins = [
       pkgs.obs-studio-plugins.obs-pipewire-audio-capture
     ];
